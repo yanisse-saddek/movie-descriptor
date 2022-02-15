@@ -1,0 +1,45 @@
+main form{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.input-search {
+    border-radius: 2px;
+    border: 1px solid;
+}
+.input-search:hover {
+    border-color:  #14c974;
+}
+
+.input-search:focus {
+    border-color:  #14c974;
+}
+
+.input-submit {
+    border-radius: 5px;
+    background-color: #6b6e6d;
+    color: white;
+}
+
+.input-submit:hover {
+    box-shadow: 5px 2px 2px black;
+}
+
+#content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px; 
+}
+
+.card-text {
+    display: flex;
+    max-height: 200px;
+    height: 200px;
+    flex-wrap: wrap;
+}
