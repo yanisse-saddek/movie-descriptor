@@ -35,7 +35,7 @@ $('.input-search').keyup(function(){
                 dataImg = data.results[i].poster_path
                 dataDesc = data.results[i].overview
                 apiImg = "https://image.tmdb.org/t/p/w500/" + dataImg
-                $('#content').prepend('<div class="card"  style="width:250px;display:flex;flex-direction:column; align-items:center">'+'<img height="370px" src="'+apiImg+'"><p>'+dataInfo+'</p>'+'<p style="padding:1rem">'+dataDesc+'</p>'+'</div>')
+                $('#content').prepend('<div class="card" style="width:25vw;display:flex;flex-direction:column; align-items:center">'+'<img height="370px" src="'+apiImg+'"><p style="font-size:1.5rem;font-weight:bold;">'+dataInfo+'</p>'+'<p style="padding:1rem">'+dataDesc+'</p>'+'</div>')
             }
         }
     });
