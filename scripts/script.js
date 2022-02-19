@@ -19,10 +19,15 @@
 
 
 $('.input-search').keyup(function(){
-    length = $('.card')
-    console.log(length.length)
-    for(i=0; i<length.length; i++){
-        length[i].remove()
+    cartList = $('.carte')
+    for(i=0; i<cartList.length; i++){
+        cartList[i].remove()
+    }
+
+
+    noResult = $('.no-result')
+    for(i=0; i<noResult.length; i++){
+        noResult[i].remove()
     }
 
     apiUrl = "https://api.themoviedb.org/3/search/movie?api_key=123131ea405ceb7ba968916397a05764&language=fr-FR&append_to_response=credits&query="+$('.input-search').val()
@@ -30,13 +35,49 @@ $('.input-search').keyup(function(){
         url: apiUrl,
         success: function(data, statuts, response) {  
             console.log(statuts)
-            for(i=data.results.length -1 ; i<data.results.length; i--){
-                dataInfo = data.results[i].original_title   
-                dataImg = data.results[i].poster_path
-                dataDesc = data.results[i].overview
-                apiImg = "https://image.tmdb.org/t/p/w500/" + dataImg
-                $('#content').prepend('<div class="card" style="width:25vw;display:flex;flex-direction:column; align-items:center">'+'<img height="370px" src="'+apiImg+'"><p style="font-size:1.5rem;font-weight:bold;">'+dataInfo+'</p>'+'<p style="padding:1rem">'+dataDesc+'</p>'+'</div>')
+            if(data.results.length){
+                for(i=data.results.length -1 ; i<data.results.length; i--){
+                    dataInfo = data.results[i].title   
+                    dataImg = data.results[i].poster_path
+                    dataDesc = data.results[i].overview.slice(0,300) + "..."
+                    dataDate = data.results[i].release_date
+                    dataDate = new Date(dataDate);
+                    dataDate = dataDate.toLocaleString()
+                    dataDate = dataDate.split(",")[0]
+                    apiImg = "https://image.tmdb.org/t/p/w500/" + dataImg
+                    if(dataImg !== null){
+                        $('#content').prepend('<div class="carte" style="width:20vw;display:flex;flex-direction:column; align-items:center">'+'<img height="320px" src="'+apiImg+'"><p style="font-size:1.2rem;font-weight:bold;margin:0">'+dataInfo+'</p>'+'<span>'+ dataDate +'</span>'+'<p class="description" style="padding:1rem;">'+dataDesc+'</p>'+'</div>')
+                        const card = document.querySelector('.carte');                
+                        const TL1 = new TimelineMax({paused: true});
+                        TL1
+                        .from(card,2,{opacity:0})
+                        TL1.play();
+                    }
+                }
+            }else{
+                $('#content').prepend('<div class="no-result"><p>Aucun résultat pour: ' + $('.input-search').val() +'</p></div>')
             }
         }
     });
 })
+
+
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("searchbar");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+
+const svg = document.querySelector('#svg-nav');                
+const TL3 = new TimelineMax({ repeat: -1, repeatDelay: 20 })
+TL3
+.from(svg,1,{rotation:-500})
+.from(svg,1,{rotation:500})
+

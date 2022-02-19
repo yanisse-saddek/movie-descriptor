@@ -12,16 +12,22 @@
     
 <body>
     <main>
-        <form>
-            <input class="input-search" type="search" placeholder="ex: Avatar">
-            <button class="input-submit" type="submit">Rechercher</button>
-        </form>
-        
-        <h2 id="titre-liste">Liste des films </h2>
-        <section id="content" class="row">
-        </section>
-    </main>
+        <div class="movie-list">
+            <form id="searchbar">
+
+                <svg id="svg-nav" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M384 112v288c0 26.51-21.49 48-48 48h-288c-26.51 0-48-21.49-48-48v-288c0-26.51 21.49-48 48-48h288C362.5 64 384 85.49 384 112zM576 127.5v256.9c0 25.5-29.17 40.39-50.39 25.79L416 334.7V177.3l109.6-75.56C546.9 87.13 576 102.1 576 127.5z"/></svg>
+                <div class="right">
+                    <h2 id="titre-liste">Rechercher un film</h2>
+                    <input class="input-search"  placeholder="ex: Avatar">                        
+                </div>
+            </form>
+            <section id="content" class="row">
+            </section>
+        </div>
+
+        </main>
     <script src="scripts/Film.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
     <script src="scripts/script.js"></script>
 </body>
 
