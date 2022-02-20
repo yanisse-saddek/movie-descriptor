@@ -20,10 +20,10 @@
 
 $('.input-search').keyup(function(){
     if($('.input-search').val() === ""){
-        loadPage()
+        loadPage(1)
+        $('.dot-list').show()
     }else{
         $('.dot-list').hide()
-
     }
 
     cartList = $('.carte')
@@ -89,45 +89,78 @@ TL3
 .from(svg,1,{rotation:-500})
 .from(svg,1,{rotation:500})
 
-function delList(){
-    for(i=0; i<$('.dot').length; i++){
-        $('.dot').remove(i)
-    }
-}
-function loadPage(i){
-    delList()
+
+function loadPage(genre, i){
     page = i;
     console.log(i)
+    genreURL = "https://api.themoviedb.org/3/discover/movie?api_key=123131ea405ceb7ba968916397a05764&page="+page+"&with_genres="
+    if(1==1){
+        if(genre === "Popularité"){
+            apiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=123131ea405ceb7ba968916397a05764&language=FR&page=" + page
+        }
+        else if(genre === 'Action'){
+            genreURL += "27" 
+        }
+        else if(genre === 'Comedie'){
+            genreURL += "35" 
+        }
+        else if(genre === 'Aventure'){
+            genreURL += "12" 
+        }
+        else if(genre === 'Animation'){
+            genreURL += "16" 
+        }
+        else if(genre === 'Crime'){
+            genreURL += "80" 
+        }
+        else if(genre === 'Documentaire'){
+            genreURL += "99" 
+        }
+        else if(genre === 'Drama'){
+            genreURL += "18" 
+        }
+        else if(genre === 'Famille'){
+            genreURL += "10751" 
+        }
+        else if(genre === 'Fantaisie'){
+            genreURL += "14" 
+        }
+        else if(genre === 'Histoire'){
+            genreURL += "36" 
+        }
+        else if(genre === 'Horreur'){
+            genreURL += "27" 
+        }
+        else if(genre === 'Musique'){
+            genreURL += "10402" 
+        }
+        else if(genre === 'Mystere'){
+            genreURL += "9648" 
+        }
+        else if(genre === 'Romance'){
+            genreURL += "10749" 
+        }
+        else if(genre === 'Science Fiction'){
+            genreURL += "878" 
+        }
+        else if(genre === 'Film TV'){
+            genreURL += "10770" 
+        }
+        else if(genre === 'Thriller'){
+            genreURL += "53" 
+        }
+        else if(genre === 'Guerre'){
+            genreURL += "10752" 
+        }
+        else if(genre === 'Western'){
+            genreURL += "37" 
+        }
     
-    apiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=123131ea405ceb7ba968916397a05764&language=FR&page=" + page
+    }
     $.ajax({
-        url: apiUrl,
+        url: genreURL,
         success: function(film, statuts, response) { 
             allPages = film.total_pages
-            if(page>3){
-                $('.dot-list').append('<div class="dot" onclick=loadPage('+ 1 +')>'+ '<<' +'</div>')           
-            }
-            if(page>2){
-                backPage = page-1
-                $('.dot-list').append('<div class="dot" onclick=loadPage('+ backPage +')>'+ '<' +'</div>')           
-            }
-            for(i=page; i<page+10; i++){
-                if(i<490){
-                    $('.dot-list').append('<div class="dot" onclick=loadPage('+ i +')>'+ i +'</div>')                
-                }else if(i>=500 && i>=490){
-console.log(i)                    
-                }else if(i>=490){
-                    console.log(i-1)
-                    $('.dot-list').append('<div class="dot" onclick=loadPage('+ i+')>'+ i +'</div>')                                    
-                }
-            }
-            if(page>1){
-                forwardPage = page+1
-                $('.dot-list').append('<div class="dot" onclick=loadPage('+ forwardPage +')>'+ '>' +'</div>')           
-            }
-            $('.dot-list').append('<div class="dot" onclick=loadPage('+ 500 +')>'+ '>>' +'</div>')           
-            
-            
             for(i=0; i<film.results.length; i++){
                 getDesc = "https://api.themoviedb.org/3/search/movie?api_key=123131ea405ceb7ba968916397a05764&language=fr-FR&append_to_response=credits&query=" + film.results[i].title
                 $.ajax({
@@ -157,5 +190,7 @@ console.log(i)
         }
     });
 }
-
-loadPage(1)
+loadPage(2,$('#select :selected').text())
+$('#select').change(function(){
+    loadPage(2, $('#select :selected').text())
+})
