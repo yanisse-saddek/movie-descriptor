@@ -66,7 +66,7 @@ main form{
 
 .description{
     width: 250px;
-    height:300px;
+    height:250px;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;
@@ -126,7 +126,11 @@ main form{
     padding-top:15px;
     padding-bottom:15px;
     outline: none;
-    border:none
+    border:none;
+}
+.do-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
 }
 .order-list select option{
     text-align: center;
@@ -136,4 +140,103 @@ main form{
 }
 .order-list select option{
     background: transparent !important
+}
+
+.carte{
+    width:20vw;
+    display:flex;
+    flex-direction:column; 
+    align-items:center;
+}
+.carte .title{
+    font-size:1.1rem;
+    width:100%;
+    text-align: center;
+    font-weight:bold;
+    margin:0;
+    height:50px
+}
+
+.carte img{
+    height:320px
+}
+.more{
+    background-color: #74080c;
+    color:white;
+    font-weight: bold;
+    font-size:1.2rem;
+    padding:0.8rem;
+    margin:30px;
+    border-radius:30PX;
+    text-decoration: none;
+}
+.more:hover{
+    color:aliceblue;
+}
+.movie-details{
+    background-color: #E10A14;
+    width:80%;
+    padding:3rem;
+    color:white;
+    display:flex;
+    border-radius:30px;
+    margin:30px;
+    flex-direction: column;
+}
+
+.title{
+    font-weight: bold;
+    font-size:1.6rem;
+    width:100%;
+    text-align: center;
+}
+.subtitle{
+    margin:10px;
+    font-size: 1.2rem;
+}
+.movie-description{
+    font-size: 1.2rem;
+    background-color: #af0a10;
+    border-radius: 30px;
+    width:100%;
+    padding:1rem;
+    margin:10px;
+}
+.right{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding:1rem;
+}
+.genre-list{
+    padding:0
+}
+.genre-list p{
+    margin:0
+}
+.description-right{
+    height:100%
+}
+.details{
+    display: flex;
+    justify-content: space-around;
+}
+.more-details{
+    background-color: #af0a10;
+    margin:10px;
+    border-radius: 20px;
+    display: flex;
+    padding:20px;
+
+}
+.langages-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.country-icon{
+    height:15px;
+    width:30px;
+    margin:2px
 }

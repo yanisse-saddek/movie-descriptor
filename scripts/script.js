@@ -53,9 +53,23 @@ $('.input-search').keyup(function(){
                     dataDate = dataDate.toLocaleString()
                     dataDate = dataDate.split(",")[0]
                     apiImg = "https://image.tmdb.org/t/p/w500/" + dataImg
+                    more = "film.html?id=" + data.results[i].id
+
                     if(dataImg !== null){
-                        $('#content').prepend('<div class="carte" style="width:20vw;display:flex;flex-direction:column; align-items:center">'+'<img height="320px" src="'+apiImg+'"><p style="font-size:1.2rem;font-weight:bold;margin:0">'+dataInfo+'</p>'+'<span>'+ dataDate +'</span>'+'<p class="description" style="padding:1rem;">'+dataDesc+'</p>'+'</div>')
-                        const card = document.querySelector('.carte');                
+                        
+                        
+                        $('#content').prepend(`
+                        <div id="${i}" class="carte">
+                            <img src="${apiImg}">
+                            <p class="title">${dataInfo}</p>
+                            <p class="date">${dataDate}</p>
+                            <p class="description">${dataDesc}</p>
+                            <a class="more" href="${more}">Voir plus</a>
+                        </div>
+                    `)
+
+
+                    const card = document.querySelector('.carte');                
                         const TL1 = new TimelineMax({paused: true});
                         TL1
                         .from(card,2,{opacity:0})
@@ -89,10 +103,17 @@ TL3
 .from(svg,1,{rotation:-500})
 .from(svg,1,{rotation:500})
 
-
-function loadPage(genre, i){
+function delList(){
+    cartList = $('.carte')
+    for(i=0; i<cartList.length; i++){
+        cartList[i].remove()
+    }
+}
+function loadPage(i,genre){
     page = i;
     console.log(i)
+    delList()
+
     genreURL = "https://api.themoviedb.org/3/discover/movie?api_key=123131ea405ceb7ba968916397a05764&page="+page+"&with_genres="
     if(1==1){
         if(genre === "Popularité"){
@@ -166,17 +187,29 @@ function loadPage(genre, i){
                 $.ajax({
                     url: getDesc,
                     success: function(description){
+                        
+                        console.log(genreURL)
+
                         title = description.results[0].title
-                        desc = description.results[0].overview
+                        desc = description.results[0].overview.slice(0,300) + "..."
                         dataImg =  description.results[0].poster_path
                         dataDate = description.results[0].release_date
                         dataDate = new Date(dataDate);
                         dataDate = dataDate.toLocaleString()
                         dataDate = dataDate.split(",")[0]
-    
+                        more = "film.html?id=" + description.results[0].id
                         apiImg = "https://image.tmdb.org/t/p/w500/" + dataImg
                         if(dataImg !== null){
-                            $('#content').prepend('<div class="carte" style="width:20vw;display:flex;flex-direction:column; align-items:center">'+'<img height="320px" src="'+apiImg+'"><p style="font-size:1.2rem;font-weight:bold;margin:0">'+title+'</p>'+'<span>'+ dataDate +'</span>'+'<p class="description" style="padding:1rem;">'+desc+'</p>'+'</div>')
+                            console.log(apiImg  )
+                            $('#content').prepend(`
+                                <div id="${i}" class="carte">
+                                    <img src="${apiImg}">
+                                    <p class="title">${title}</p>
+                                    <p class="date">${dataDate}</p>
+                                    <p class="description">${desc}</p>
+                                    <a class="more" href="${more}">Voir plus</a>
+                                </div>
+                            `)
                             const card = document.querySelector('.carte');                
                             const TL1 = new TimelineMax({paused: true});
                             TL1
