@@ -1,7 +1,12 @@
 
+:root{
+    --primary: #3498DB;
+    --secondary: #5DADE2;
+    --third: #85C1E9;
+}
 body{
     overflow-x: hidden;
-    background-color: #af0a10;
+    background-color: var(--primary);
 
 }
 main form{
@@ -13,7 +18,7 @@ main form{
     padding-left:4rem;
     padding-right:4rem;
     color:white;
-    background-color: #af0a10;
+    background-color: var(--primary);
 }
 #titre-liste{
     font-weight: bold;
@@ -42,7 +47,7 @@ main form{
     padding:1rem;
     border-radius: 30px;
     color:white;
-    background-color: #E10A14;
+    background-color: var(--secondary);
 }
 
 .carte {
@@ -104,13 +109,13 @@ main form{
     align-items: center;
     justify-content: center;
     border-radius: 30px;
-    background-color: #E10A14;
+    background-color: var(--secondary);
 }
 .dots{
     display:flex;
 }
 .dot-action{
-    background-color: #74080c;
+    background-color: var(--third);
 }
 .order-list{
     display: flex;
@@ -120,7 +125,7 @@ main form{
     padding:10px;
 }
 .order-list select{
-    background-color: #74080c;
+    background-color: var(--third);
     padding-right:80px;
     color:white;
     padding-top:15px;
@@ -161,7 +166,7 @@ main form{
     height:320px
 }
 .more{
-    background-color: #74080c;
+    background-color: var(--third);
     color:white;
     font-weight: bold;
     font-size:1.2rem;
@@ -174,7 +179,7 @@ main form{
     color:aliceblue;
 }
 .movie-details{
-    background-color: #E10A14;
+    background-color: var(--secondary);
     width:80%;
     padding:3rem;
     color:white;
@@ -196,7 +201,7 @@ main form{
 }
 .movie-description{
     font-size: 1.2rem;
-    background-color: #af0a10;
+    background-color: var(--primary);
     border-radius: 30px;
     width:100%;
     padding:1rem;
@@ -206,7 +211,14 @@ main form{
     display:flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
     padding:1rem;
+}
+.video-preview{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .genre-list{
     padding:0
@@ -222,7 +234,7 @@ main form{
     justify-content: space-around;
 }
 .more-details{
-    background-color: #af0a10;
+    background-color: var(--primary);
     margin:10px;
     border-radius: 20px;
     display: flex;
@@ -246,7 +258,7 @@ main form{
     grid-gap:15px;
 }
 .actor{
-    background: #74080c;
+    background: var(--primary);
     padding:1rem;
     width:180px;
     display: flex;
@@ -279,7 +291,7 @@ main form{
     justify-content: flex-end;
 }
 .btn-movie{
-    background-color: #74080c;
+    background-color: var(--third);
     padding:0.5rem;
     margin-left:20px;
     width:150px;
