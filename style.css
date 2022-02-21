@@ -205,7 +205,6 @@ main form{
 .right{
     display:flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     padding:1rem;
 }
@@ -239,4 +238,44 @@ main form{
     height:15px;
     width:30px;
     margin:2px
+}
+
+.infos-cast{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap:15px;
+}
+.actor{
+    background: #74080c;
+    padding:1rem;
+    padding-left:2rem;
+    padding-right:2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 30px;
+}
+.actor-img{
+    height:120px
+}
+
+.change-info{
+    display: flex;
+    width:100%;
+    align-items: center;
+    justify-content: flex-end;
+}
+.btn-movie{
+    background-color: #74080c;
+    padding:0.5rem;
+    margin-left:20px;
+    width:150px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius:30px
+}
+.btn-movie p{
+    margin:0
 }

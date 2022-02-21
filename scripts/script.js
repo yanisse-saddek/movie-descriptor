@@ -45,6 +45,7 @@ $('.input-search').keyup(function(){
             console.log(statuts)
             if(data.results.length){
                 for(i=data.results.length -1 ; i<data.results.length; i--){
+
                     dataInfo = data.results[i].title   
                     dataImg = data.results[i].poster_path
                     dataDesc = data.results[i].overview.slice(0,300) + "..."
@@ -109,11 +110,15 @@ function delList(){
         cartList[i].remove()
     }
 }
-function loadPage(i,genre){
-    page = i;
-    console.log(i)
+function delDots(){
+    var dot = $('.dot-page')
+    for(i=0; i<dot.length; i++){
+        dot[i].remove()
+    }
+}
+function loadPage(page,genre){
     delList()
-
+    delDots()
     genreURL = "https://api.themoviedb.org/3/discover/movie?api_key=123131ea405ceb7ba968916397a05764&page="+page+"&with_genres="
     if(1==1){
         if(genre === "Popularité"){
@@ -178,9 +183,40 @@ function loadPage(i,genre){
         }
     
     }
+    console.log(genreURL, page)
     $.ajax({
         url: genreURL,
         success: function(film, statuts, response) { 
+            genre = genre
+            if(page>1){
+                back = page -1
+                $('.dot-back').attr('onclick', 'loadPage('+ back  + ",'" +genre+ "'" +')')
+            }
+            if(page <500){
+                forward = page + 1
+                $('.dot-forward').attr('onclick', 'loadPage('+ forward  + ",'" +genre+ "'" +')')
+            }
+            pagetoLoad = page+5
+            allDots = 0
+            dotList = []
+            for(i=1; i<pagetoLoad; i++){
+                console.log(-i)
+                if(dotList.length <i +9){
+                    if(-i>=0){
+                        $('.dots').prepend('<div class="dot dot-page">'+ -i +'</div>')
+                        $('.dot-page:nth-child('+-i+')').attr('onclick', 'loadPage('+ -i +",'"+ genre + "'" +')')    
+                    }
+                    $('.dots').append('<div class="dot dot-page">'+ i +'</div>')
+                    $('.dot-page:nth-child('+i+')').attr('onclick', 'loadPage('+ i +",'"+ genre + "'" +')')
+                    dotList.push(i)
+                }else{
+                    dotList.shift(1)
+                    $('.dot-page:first-child').hide()
+                    console.log("yoooo",$('.dot-page:first-child'))
+                }
+            }
+            console.log("page",page)
+
             allPages = film.total_pages
             for(i=0; i<film.results.length; i++){
                 getDesc = "https://api.themoviedb.org/3/search/movie?api_key=123131ea405ceb7ba968916397a05764&language=fr-FR&append_to_response=credits&query=" + film.results[i].title
@@ -188,7 +224,6 @@ function loadPage(i,genre){
                     url: getDesc,
                     success: function(description){
                         
-                        console.log(genreURL)
 
                         title = description.results[0].title
                         desc = description.results[0].overview.slice(0,300) + "..."
@@ -200,7 +235,6 @@ function loadPage(i,genre){
                         more = "film.html?id=" + description.results[0].id
                         apiImg = "https://image.tmdb.org/t/p/w500/" + dataImg
                         if(dataImg !== null){
-                            console.log(apiImg  )
                             $('#content').prepend(`
                                 <div id="${i}" class="carte">
                                     <img src="${apiImg}">
@@ -223,7 +257,7 @@ function loadPage(i,genre){
         }
     });
 }
-loadPage(2,$('#select :selected').text())
+loadPage(1,$('#select :selected').text())
 $('#select').change(function(){
-    loadPage(2, $('#select :selected').text())
+    loadPage(1, $('#select :selected').text())
 })

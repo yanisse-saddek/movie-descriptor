@@ -17,34 +17,75 @@ $.ajax({
         $.ajax({
             url:videoApi, 
             success: function(resultVideoApi){
-                title = data.title
-                image = "https://image.tmdb.org/t/p/w500/" + data.poster_path
-                genreList = data.genres
-                description = data.overview
-                movieId = data.id
-                $('.title').append(title)
-                $('.img').attr("src", image)
-                $('.movie-description').append(description)
-                for(i=0; i<genreList.length; i++){
-                    $('.genre-list').append('<p>'+genreList[i].name+'</p>')
-                }
-                if(!resultVideoApi.results[0]){
-                    $('.video-preview').hide()
-                }
-                else{
-                    $('.video').attr('src', 'https://www.youtube.com/embed/' + resultVideoApi.results[0].key )
-                }
+                getActorList = "https://api.themoviedb.org/3/movie/"+ id +"/credits?api_key=123131ea405ceb7ba968916397a05764&language=FR"
+                $.ajax({
+                    url:getActorList,
+                    success: function(actorList){
 
-                for(i=0; i<data.spoken_languages.length;i++){
+                        for(i=0; i<actorList.cast.length; i++){
+                            actor = actorList.cast[i]
+                            imgActor = "https://image.tmdb.org/t/p/w500/"+ actor.profile_path
+                            nameActor = actor.name
+                            characterActor = actor.character
 
-                    if(data.spoken_languages[i].iso_639_1 === "en"){
-                        flag = "<img class='country-icon' src='https://flagcdn.com/gb.svg'>"
-                    }else{
-                        flag = "<img class='country-icon' src='https://flagcdn.com/"+data.spoken_languages[i].iso_639_1+".svg'>"                        
+                            if(actor.profile_path !== null){
+                                $('.infos-cast').append(`
+                                <div class="actor">
+                                    <img class="actor-img" src="${imgActor}">
+                                    <p class="actor-name">${nameActor}</p>
+                                    <p class="actor-role">${characterActor}</p>
+                                </div>
+                            `)
+                            }
+                        }
+
+
+                        title = data.title
+                        image = "https://image.tmdb.org/t/p/w500/" + data.poster_path
+                        genreList = data.genres
+                        description = data.overview
+                        movieId = data.id
+                        $('.title').append(title)
+                        $('.img').attr("src", image)
+                        $('.movie-description').append(description)
+                        for(i=0; i<genreList.length; i++){
+                            $('.genre-list').append('<p>'+genreList[i].name+'</p>')
+                        }
+                        if(!resultVideoApi.results[0]){
+                            $('.video-preview').hide()
+                        }
+                        else{
+                            $('.video').attr('src', 'https://www.youtube.com/embed/' + resultVideoApi.results[0].key )
+                        }
+        
+                        for(i=0; i<data.spoken_languages.length;i++){
+        
+                            if(data.spoken_languages[i].iso_639_1 === "en"){
+                                flag = "<img class='country-icon' src='https://flagcdn.com/gb.svg'>"
+                            }else{
+                                flag = "<img class='country-icon' src='https://flagcdn.com/"+data.spoken_languages[i].iso_639_1+".svg'>"                        
+                            }
+                            $('.langages-list').append(flag)
+                        }
                     }
-                    $('.langages-list').append(flag)
-                }
+                })
+
             }
         })
     }
+})
+
+var infoMovie = $('.infos-movie')
+var infoCast = $('.infos-cast')
+infoMovie.show()
+infoCast.hide()
+
+$('.cast-list').click(function(){
+    infoCast.show()
+    infoMovie.hide()
+})
+
+$('.movie-desc').click(function(){
+    infoCast.hide()
+    infoMovie.show()
 })
