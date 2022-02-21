@@ -242,14 +242,13 @@ main form{
 
 .infos-cast{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap:15px;
 }
 .actor{
     background: #74080c;
     padding:1rem;
-    padding-left:2rem;
-    padding-right:2rem;
+    width:180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -258,6 +257,19 @@ main form{
 }
 .actor-img{
     height:120px
+}
+.actor-name{
+    height:30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    width:100%
+}
+.actor-role{
+    height:30px;
+    font-size: 0.8rem;
+    text-align: center;
+    width:100%;
 }
 
 .change-info{
