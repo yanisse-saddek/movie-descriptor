@@ -48,6 +48,7 @@ main form{
     border-radius: 30px;
     color:white;
     background-color: var(--secondary);
+    margin-bottom:20px
 }
 
 .carte {
