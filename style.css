@@ -192,8 +192,7 @@ main form{
 .title{
     font-weight: bold;
     font-size:1.6rem;
-    width:100%;
-    text-align: center;
+    margin:0
 }
 .subtitle{
     margin:10px;
@@ -302,4 +301,21 @@ main form{
 }
 .btn-movie p{
     margin:0
+}
+.return-page{
+    justify-content: flex-end;
+    margin-right:10%
+}
+.top-info{
+    width:100%;
+    text-align: center;
+}
+.movie-date{
+    margin:0px
+}
+
+.available-date{
+    font-size:1.1rem;
+    font-weight: bold;
+    margin-right:20px;
 }

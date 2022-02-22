@@ -45,7 +45,14 @@ $.ajax({
                         genreList = data.genres
                         description = data.overview
                         movieId = data.id
+                        dataDate = data.release_date
+                        dataDate = new Date(dataDate);
+                        dataDate = dataDate.toLocaleString()
+                        date = dataDate.split(",")
+
+                        console.log(date)
                         $('.title').append(title)
+                        $('.movie-date').append(date[0])
                         $('.img').attr("src", image)
                         $('.movie-description').append(description)
                         for(i=0; i<genreList.length; i++){
@@ -88,4 +95,9 @@ $('.cast-list').click(function(){
 $('.movie-desc').click(function(){
     infoCast.hide()
     infoMovie.show()
+})
+
+
+$('.dot-back').click(function(){
+    document.location.href = "index.html"
 })
